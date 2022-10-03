@@ -4,7 +4,7 @@
 const option = {
   name: '',
   alias: '',
-  fn: () => {}
+  fn: () => { }
 };
 
 class Program {
@@ -47,7 +47,12 @@ class Program {
       console.log('\x1b[33m', 'no options was provided');
     }
 
-    parsedOptions.forEach(({ option, value }) => {
+    const filterOption = parsedOptions.find((val) => val.option === "--filter" || val.option === "-f")
+    const countOption = parsedOptions.find((val) => val.option === "--count" || val.option === "-c")
+
+    // remove undefined value from array
+    const options = [filterOption, countOption].filter((e) => e)
+    options.forEach(({ option, value }) => {
       const executableOption = this.#options.find(
         (opt) => opt.name === option || opt.alias === option
       );
