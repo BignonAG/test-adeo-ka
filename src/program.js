@@ -4,7 +4,7 @@
 const option = {
   name: '',
   alias: '',
-  fn: () => { }
+  fn: () => { return a }
 };
 
 class Program {
@@ -43,6 +43,7 @@ class Program {
     let i = 0;
     const args = process.argv;
     const parsedOptions = this.#getOptions(args);
+    let res = ""
     if (!parsedOptions.length) {
       console.log('\x1b[33m', 'no options was provided');
     }
@@ -58,12 +59,13 @@ class Program {
       );
 
       if (executableOption) {
-        executableOption.fn(value);
+        res = executableOption.fn(value);
         i++;
       }
     });
 
     if (!i) console.log('\x1b[31m', 'option(s) not found');
+    console.log(res);
   };
 
   /**

@@ -14,11 +14,11 @@ const main = async () => {
           throw new Error('filter value is required');
         }
         const res = dataService.filterByAnimal(value).data;
-        console.log(res);
+        return res
       })
       .option('--count', '-c', () => {
         const res = dataService.count().data;
-        console.log(res);
+        return res
       })
       .parseArgs();
   } catch (err) {
